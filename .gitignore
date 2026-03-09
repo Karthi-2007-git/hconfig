@@ -1,0 +1,30 @@
+# Cache-heavy and volatile application state
+Code/
+mozilla/
+Cemu/
+
+# Runtime/session state
+session/
+pulse/
+
+# Common caches and temp files
+**/Cache/
+**/Code Cache/
+**/GPUCache/
+**/blob_storage/
+**/logs/
+**/Crashpad/
+**/Service Worker/
+**/Session Storage/
+**/Shared Dictionary/
+**/WebStorage/
+**/DawnGraphiteCache/
+**/DawnWebGPUCache/
+*.log
+*.tmp
+*.swp
+
+# Local backups
+*.bak
+*~
+.git.backup-*/

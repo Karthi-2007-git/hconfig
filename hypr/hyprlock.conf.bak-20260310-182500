@@ -1,0 +1,214 @@
+# BACKGROUND
+background {
+    monitor =
+    path = screenshot
+    blur_passes = 3
+    blur_size = 8
+    contrast = 1
+    brightness = 0.6
+}
+
+# GENERAL
+general {
+    no_fade_in = true
+    no_fade_out = true
+    hide_cursor = false
+    grace = 0
+    disable_loading_bar = true
+}
+
+# PASSWORD INPUT
+input-field {
+    monitor =
+    size = 260, 60
+    outline_thickness = 2
+
+    dots_size = 0.25
+    dots_spacing = 0.35
+    dots_center = true
+
+    outer_color = rgba(0,0,0,0)
+    inner_color = rgba(0,0,0,0.25)
+    font_color = rgb(230,230,230)
+
+    rounding = 10
+    placeholder_text = <i>Enter Password</i>
+
+    position = 0, -180
+    halign = center
+    valign = center
+}
+
+# TIME
+label {
+    monitor =
+    text = cmd[update:1000] date "+%H:%M"
+    font_size = 95
+    font_family = JetBrainsMono Nerd Font
+    color = rgba(255,255,255,0.85)
+
+    position = 0, 200
+    halign = center
+    valign = center
+}
+
+# DATE
+label {
+    monitor =
+    text = cmd[update:1000] date "+%A, %B %d"
+    font_size = 24
+    font_family = JetBrainsMono Nerd Font
+    color = rgba(255,255,255,0.75)
+
+    position = 0, 300
+    halign = center
+    valign = center
+}
+
+# PROFILE IMAGE
+image {
+    monitor =
+    path = $HOME/Pictures/profile.png
+    size = 110
+    border_size = 2
+    border_color = rgba(255,255,255,0.7)
+
+    position = 0, -90
+    halign = center
+    valign = center
+}
+
+# USERNAME
+label {
+    monitor =
+    text = cmd[update:60000] whoami
+    font_size = 18
+    font_family = JetBrainsMono Nerd Font
+    color = rgba(255,255,255,0.8)
+
+    position = 0, -10
+    halign = center
+    valign = top
+}
+
+# BATTERY
+label {
+    monitor =
+    text = cmd[update:5000] cat /sys/class/power_supply/BAT*/capacity | head -n1
+    font_size = 20
+    font_family = JetBrainsMono Nerd Font
+    color = rgba(255,255,255,0.8)
+
+    position = -90, -10
+    halign = right
+    valign = top
+}
+
+# WIFI
+label {
+    text = cmd[update:5000] nmcli -t -f active,ssid dev wifi | awk -F: '/^yes/ {print $2}'
+    font_size = 20
+    font_family = JetBrainsMono Nerd Font
+    color = rgba(255,255,255,0.8)
+
+    position = -20, -10
+    halign = right
+    valign = top
+}
+
+label {
+    text = cmd[update:5000] bluetoothctl show | grep "Powered" | awk '{print $2}'
+    font_size = 20
+    font_family = JetBrainsMono Nerd Font
+    color = rgba(255,255,255,0.8)
+
+    position = -20, 30
+    halign = right
+    valign = top
+}
+# CURRENT SONG
+label {
+    monitor =
+    text = cmd[update:2000] playerctl metadata title
+    font_size = 18
+    font_family = JetBrainsMono Nerd Font
+    color = rgba(255,255,255,0.8)
+
+    position = 0, 50
+    halign = center
+    valign = bottom
+}
+# SHUTDOWN BUTTON
+shape {
+    monitor =
+    size = 120,40
+    color = rgba(0,0,0,0.5)
+
+    position = -150,-200
+    halign = right
+    valign = bottom
+
+    rounding = 8
+
+    on-click = systemctl poweroff
+}
+
+label {
+    text = Shutdown
+    font_size = 18
+    color = rgba(255,255,255,0.9)
+
+    position = -150,-200
+    halign = right
+    valign = bottom
+}
+
+# REBOOT BUTTON
+shape {
+    monitor =
+    size = 120,40
+    color = rgba(0,0,0,0.5)
+
+    position = 0,-200
+    halign = center
+    valign = bottom
+
+    rounding = 8
+
+    on-click = systemctl reboot
+}
+
+label {
+    text = Restart
+    font_size = 18
+    color = rgba(255,255,255,0.9)
+
+    position = 0,-200
+    halign = center
+    valign = bottom
+}
+
+# LOGOUT BUTTON
+shape {
+    monitor =
+    size = 120,40
+    color = rgba(0,0,0,0.5)
+
+    position = 150,-200
+    halign = left
+    valign = bottom
+
+    rounding = 8
+
+    on-click = hyprctl dispatch exit
+}
+
+label {
+    text = Logout
+    font_size = 18
+    color = rgba(255,255,255,0.9)
+
+    position = 150,-200
+    halign = left
+    valign = bottom
+}

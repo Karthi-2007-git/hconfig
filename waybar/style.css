@@ -1,29 +1,284 @@
+/* ╔══════════════════════════════════════════════╗
+   ║       Waybar Style — Frosted Glass Dark      ║
+   ║     Place at: ~/.config/waybar/style.css     ║
+   ╚══════════════════════════════════════════════╝
+
+   Font requirements:
+   - MesloLGS NF (for icons + text)
+
+   Install: yay -S ttf-meslo-nerd
+*/
+
+
+/* ── Variables ─────────────────────────────────────── */
 * {
-  font-family: JetBrainsMono Nerd Font;
-  font-size: 14px;
+  font-family: "MesloLGS NF", monospace;
+  font-size: 13px;
+  font-weight: 500;
   border: none;
+  border-radius: 0;
+  min-height: 0;
 }
 
+/* ── Base ──────────────────────────────────────────── */
 window#waybar {
-  background: rgba(20,20,20,0.85);
-  color: #ffffff;
+  background: transparent;
+}
+
+window#waybar.hidden {
+  opacity: 0.2;
+}
+
+/* ── Bar Container ─────────────────────────────────── */
+.modules-left,
+.modules-center,
+.modules-right {
+  background: rgba(17, 17, 27, 0.80);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  border-radius: 14px;
+  padding: 2px 6px;
+  margin: 0;
+  box-shadow:
+    0 4px 24px rgba(0, 0, 0, 0.45),
+    inset 0 1px 0 rgba(255, 255, 255, 0.06);
+}
+
+/* ── Common Module Pill ────────────────────────────── */
+#workspaces,
+#clock,
+#network,
+#bluetooth,
+#pulseaudio,
+#backlight,
+#battery,
+#cpu,
+#memory,
+#temperature,
+#tray,
+#custom-launcher,
+#custom-media,
+#custom-notification,
+#custom-power,
+#window {
+  padding: 3px 10px;
+  border-radius: 10px;
+  color: #cdd6f4;
+  background: transparent;
+  transition: all 0.2s ease;
+}
+
+/* ── Hover Glow ─────────────────────────────────────── */
+#clock:hover,
+#network:hover,
+#bluetooth:hover,
+#pulseaudio:hover,
+#backlight:hover,
+#battery:hover,
+#cpu:hover,
+#memory:hover,
+#custom-power:hover,
+#custom-notification:hover {
+  background: rgba(137, 180, 250, 0.10);
+  color: #89b4fa;
+}
+
+/* ── Launcher Button ────────────────────────────────── */
+#custom-launcher {
+  font-size: 16px;
+  color: #89b4fa;
+  padding: 3px 12px 3px 8px;
+}
+
+#custom-launcher:hover {
+  color: #cba6f7;
+  background: rgba(203, 166, 247, 0.10);
+}
+
+/* ── Workspaces ─────────────────────────────────────── */
+#workspaces {
+  padding: 2px 4px;
 }
 
 #workspaces button {
-  padding: 0 8px;
-  margin: 2px;
-  border-radius: 6px;
+  all: unset;
+  padding: 2px 8px;
+  border-radius: 8px;
+  color: rgba(205, 214, 244, 0.35);
+  font-size: 10px;
+  transition: all 0.2s ease;
+}
+
+#workspaces button:hover {
+  color: #cdd6f4;
+  background: rgba(137, 180, 250, 0.12);
 }
 
 #workspaces button.active {
-  background: #89b4fa;
-  color: black;
+  color: #89b4fa;
+  background: rgba(137, 180, 250, 0.15);
+  font-size: 12px;
 }
 
+#workspaces button.urgent {
+  color: #f38ba8;
+  background: rgba(243, 139, 168, 0.15);
+}
+
+#workspaces button.persistent {
+  color: rgba(205, 214, 244, 0.20);
+}
+
+/* ── Window Title ───────────────────────────────────── */
+#window {
+  color: rgba(205, 214, 244, 0.55);
+  font-size: 12px;
+  padding: 3px 8px;
+}
+
+/* ── Clock ──────────────────────────────────────────── */
 #clock {
-  font-weight: bold;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  color: #cdd6f4;
+  padding: 4px 16px;
 }
 
-#cpu, #memory, #network, #pulseaudio {
-  padding: 0 10px;
+/* ── Network ─────────────────────────────────────────── */
+#network {
+  color: #a6e3a1;
+}
+
+#network.disconnected {
+  color: #585b70;
+}
+
+/* ── Bluetooth ────────────────────────────────────────── */
+#bluetooth {
+  color: #89b4fa;
+}
+
+#bluetooth.disabled,
+#bluetooth.off {
+  color: #585b70;
+}
+
+/* ── Audio ───────────────────────────────────────────── */
+#pulseaudio {
+  color: #cba6f7;
+}
+
+#pulseaudio.muted {
+  color: #585b70;
+}
+
+#pulseaudio.bluetooth {
+  color: #89b4fa;
+}
+
+/* ── Backlight ────────────────────────────────────────── */
+#backlight {
+  color: #f9e2af;
+}
+
+/* ── Battery ──────────────────────────────────────────── */
+#battery {
+  color: #a6e3a1;
+}
+
+#battery.charging,
+#battery.plugged {
+  color: #a6e3a1;
+}
+
+#battery.warning:not(.charging) {
+  color: #fab387;
+}
+
+#battery.critical:not(.charging) {
+  color: #f38ba8;
+  background: rgba(243, 139, 168, 0.12);
+}
+
+
+/* ── CPU ──────────────────────────────────────────────── */
+#cpu {
+  color: #89dceb;
+}
+
+/* ── Memory ───────────────────────────────────────────── */
+#memory {
+  color: #cba6f7;
+}
+
+/* ── Temperature ─────────────────────────────────────── */
+#temperature {
+  color: #fab387;
+}
+
+#temperature.critical {
+  color: #f38ba8;
+  background: rgba(243, 139, 168, 0.12);
+}
+
+/* ── Tray ────────────────────────────────────────────── */
+#tray {
+  padding: 3px 6px;
+}
+
+#tray > .passive {
+  -gtk-icon-effect: dim;
+}
+
+#tray > .needs-attention {
+  -gtk-icon-effect: highlight;
+  background-color: rgba(243, 139, 168, 0.15);
+  border-radius: 6px;
+}
+
+/* ── Media ───────────────────────────────────────────── */
+#custom-media {
+  color: #a6e3a1;
+}
+
+#custom-media.paused {
+  color: #585b70;
+}
+
+/* ── Notification Bell ─────────────────────────────── */
+#custom-notification {
+  font-size: 14px;
+  color: #f9e2af;
+}
+
+#custom-notification.dnd-none,
+#custom-notification.inhibited-none {
+  color: #585b70;
+}
+
+/* ── Power Button ────────────────────────────────────── */
+#custom-power {
+  font-size: 14px;
+  color: #f38ba8;
+  padding: 3px 10px 3px 6px;
+}
+
+#custom-power:hover {
+  background: rgba(243, 139, 168, 0.15);
+  color: #f38ba8;
+}
+
+/* ── Tooltip ─────────────────────────────────────────── */
+tooltip {
+  background: rgba(17, 17, 27, 0.92);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 10px;
+  color: #cdd6f4;
+  padding: 4px 8px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+}
+
+tooltip label {
+  color: #cdd6f4;
+  font-size: 12px;
 }

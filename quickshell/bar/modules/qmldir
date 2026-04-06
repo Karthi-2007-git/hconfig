@@ -1,0 +1,9 @@
+Workspaces 1.0 Workspaces.qml
+ActiveWindow 1.0 ActiveWindow.qml
+Clock 1.0 Clock.qml
+AudioIcon 1.0 AudioIcon.qml
+NetworkIcon 1.0 NetworkIcon.qml
+BatteryIcon 1.0 BatteryIcon.qml
+BrightnessSlider 1.0 BrightnessSlider.qml
+SysTray 1.0 SysTray.qml
+PowerButton 1.0 PowerButton.qml

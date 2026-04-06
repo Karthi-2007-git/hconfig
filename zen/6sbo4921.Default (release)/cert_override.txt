@@ -1,0 +1,4 @@
+# PSM Certificate Override Settings file
+# This is a generated file!  Do not edit.
+localhost:5173:	OID.2.16.840.1.101.3.4.2.1	18:14:27:1D:58:73:6A:A0:B1:56:23:B6:46:19:A6:B4:B1:DE:A7:DB:A3:E1:30:F3:EC:CA:BF:33:05:F4:5E:83	
+localhost:5174:	OID.2.16.840.1.101.3.4.2.1	7A:A4:5B:F3:F0:02:68:24:1B:69:2C:92:2E:F2:9F:50:8B:04:1B:FD:89:F3:AF:0D:0E:72:70:2F:77:91:8F:6F	

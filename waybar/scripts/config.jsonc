@@ -1,0 +1,257 @@
+{
+  // ╔══════════════════════════════════════════════╗
+  // ║        Waybar Config — Hyprland / Arch       ║
+  // ║     Place at: ~/.config/waybar/config.jsonc  ║
+  // ╚══════════════════════════════════════════════╝
+
+  "layer": "top",
+  "position": "top",
+  "height": 36,
+  "spacing": 4,
+  "margin-top": 6,
+  "margin-left": 10,
+  "margin-right": 10,
+  "exclusive": true,
+  "passthrough": false,
+
+  // ── Modules Layout ──────────────────────────────
+  "modules-left": [
+    "custom/launcher",
+    "hyprland/workspaces",
+    "hyprland/window"
+  ],
+
+  "modules-center": [
+    "clock"
+  ],
+
+  "modules-right": [
+    "custom/media",
+    "network",
+    "bluetooth",
+    "pulseaudio",
+    "backlight",
+    "battery",
+    "cpu",
+    "memory",
+    "temperature",
+    "tray",
+    "custom/notification",
+    "custom/power"
+  ],
+
+  // ── Left Modules ─────────────────────────────────
+
+  "custom/launcher": {
+    "format": "  ",
+    "tooltip": false,
+    "on-click": "wofi --show drun",
+    "on-click-right": "hyprpicker -a"
+  },
+
+  "hyprland/workspaces": {
+    "format": "{icon}",
+    "on-click": "activate",
+    "on-scroll-up": "hyprctl dispatch workspace e+1",
+    "on-scroll-down": "hyprctl dispatch workspace e-1",
+    "persistent-workspaces": {
+      "1": [],
+      "2": [],
+      "3": [],
+      "4": [],
+      "5": []
+    },
+    "format-icons": {
+      "1": "󰊠",
+      "2": "󰊠",
+      "3": "󰊠",
+      "4": "󰊠",
+      "5": "󰊠",
+      "active": "󰮯",
+      "default": "󰊠",
+      "urgent": "󱓻"
+    }
+  },
+
+  "hyprland/window": {
+    "format": "  {title}",
+    "max-length": 40,
+    "separate-outputs": true,
+    "rewrite": {
+      "(.*) — Mozilla Firefox": "󰈹  $1",
+      "(.*) - fish": "  fish",
+      "(.*) - zsh": "  $1",
+      "Alacritty": "  Terminal",
+      "kitty": "  Terminal",
+      "Code - OSS": "󰨞  VSCode"
+    }
+  },
+
+  // ── Center Modules ───────────────────────────────
+
+  "clock": {
+    "interval": 1,
+    "format": "  {:%H:%M}",
+    "format-alt": "  {:%a, %b %d}",
+    "tooltip-format": "<tt><small>{calendar}</small></tt>",
+    "calendar": {
+      "mode": "year",
+      "mode-mon-col": 3,
+      "weeks-pos": "right",
+      "on-scroll": 1,
+      "format": {
+        "months": "<span color='#cdd6f4'><b>{}</b></span>",
+        "days": "<span color='#cdd6f4'><b>{}</b></span>",
+        "weeks": "<span color='#89b4fa'>W{}</span>",
+        "weekdays": "<span color='#89dceb'><b>{}</b></span>",
+        "today": "<span color='#f38ba8'><b><u>{}</u></b></span>"
+      }
+    },
+    "actions": {
+      "on-click-right": "mode",
+      "on-scroll-up": "shift_up",
+      "on-scroll-down": "shift_down"
+    }
+  },
+
+  // ── Right Modules ─────────────────────────────────
+
+  "custom/media": {
+    "format": "{icon}  {}",
+    "return-type": "json",
+    "max-length": 30,
+    "format-icons": {
+      "spotify": "󰓇",
+      "default": "󰎇"
+    },
+    "escape": true,
+    "exec": "$HOME/.config/waybar/scripts/mediaplayer.py 2>/dev/null",
+    "on-click": "playerctl play-pause",
+    "on-scroll-up": "playerctl next",
+    "on-scroll-down": "playerctl previous"
+  },
+
+  "network": {
+    "interval": 3,
+    "format-wifi": "  {essid}",
+    "format-ethernet": "󰈀  {ipaddr}",
+    "format-linked": "󰖪  (No IP)",
+    "format-disconnected": "󰤭  Offline",
+    "format-alt": "  {bandwidthUpBits}   {bandwidthDownBits}",
+    "tooltip-format": "  {ifname}\n  {ipaddr}/{cidr}\n  {gwaddr}\n  {signalStrength}%",
+    "on-click-right": "nm-connection-editor"
+  },
+
+  "bluetooth": {
+    "format": "󰂯",
+    "format-connected": "󰂱  {device_alias}",
+    "format-connected-battery": "󰂱  {device_alias} {device_battery_percentage}%",
+    "tooltip-format": "{controller_alias}\t{controller_address}\n\n{num_connections} connected",
+    "tooltip-format-connected": "{controller_alias}\t{controller_address}\n\n{num_connections} connected\n\n{device_enumerate}",
+    "tooltip-format-enumerate-connected": "{device_alias}\t{device_address}",
+    "tooltip-format-enumerate-connected-battery": "{device_alias}\t{device_address}\t{device_battery_percentage}%",
+    "on-click": "blueman-manager"
+  },
+
+  "pulseaudio": {
+    "format": "{icon}  {volume}%",
+    "format-bluetooth": "󰂰  {volume}%",
+    "format-bluetooth-muted": "󰂲  Muted",
+    "format-muted": "󰖁  Muted",
+    "format-source": "  {volume}%",
+    "format-source-muted": "  Muted",
+    "format-icons": {
+      "headphone": "󰋋",
+      "hands-free": "󰋎",
+      "headset": "󰋎",
+      "phone": "󰏲",
+      "portable": "󰏲",
+      "car": "󰄋",
+      "default": ["󰕿", "󰖀", "󰕾"]
+    },
+    "scroll-step": 5,
+    "on-click": "pavucontrol",
+    "on-click-right": "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle",
+    "tooltip-format": "{desc}"
+  },
+
+  "backlight": {
+    "device": "intel_backlight",
+    "format": "{icon}  {percent}%",
+    "format-icons": ["󰃞", "󰃟", "󰃠"],
+    "on-scroll-up": "brightnessctl set +5%",
+    "on-scroll-down": "brightnessctl set 5%-",
+    "smooth-scrolling-threshold": 1
+  },
+
+  "battery": {
+    "states": {
+      "good": 80,
+      "warning": 30,
+      "critical": 15
+    },
+    "format": "{icon}  {capacity}%",
+    "format-charging": "󰂄  {capacity}%",
+    "format-plugged": "󰚥  {capacity}%",
+    "format-full": "󰁹  Full",
+    "format-alt": "{icon}  {time}",
+    "format-icons": ["󰁺", "󰁻", "󰁼", "󰁽", "󰁾", "󰁿", "󰂀", "󰂁", "󰂂", "󰁹"],
+    "tooltip-format": "{timeTo}\n{power}W"
+  },
+
+  "cpu": {
+    "interval": 3,
+    "format": "  {usage}%",
+    "tooltip-format": "CPU: {usage}%\nLoad: {load}",
+    "on-click": "alacritty -e btop"
+  },
+
+  "memory": {
+    "interval": 5,
+    "format": "󰍛  {used:.1f}G",
+    "tooltip-format": "RAM: {used:.1f}GiB / {total:.1f}GiB\nSwap: {swapUsed:.1f}GiB / {swapTotal:.1f}GiB",
+    "on-click": "alacritty -e btop"
+  },
+
+  "temperature": {
+    "thermal-zone": 2,
+    "hwmon-path": "/sys/class/hwmon/hwmon2/temp1_input",
+    "critical-threshold": 80,
+    "format-critical": "  {temperatureC}°C",
+    "format": "  {temperatureC}°C",
+    "tooltip": true
+  },
+
+  "tray": {
+    "icon-size": 16,
+    "spacing": 8
+  },
+
+  "custom/notification": {
+    "tooltip": false,
+    "format": "{icon}",
+    "format-icons": {
+      "notification": "󱅫",
+      "none": "󰂚",
+      "dnd-notification": "󱅫",
+      "dnd-none": "󰂛",
+      "inhibited-notification": "󱅫",
+      "inhibited-none": "󰂚",
+      "dnd-inhibited-notification": "󱅫",
+      "dnd-inhibited-none": "󰂛"
+    },
+    "return-type": "json",
+    "exec-if": "which swaync-client",
+    "exec": "swaync-client -swb",
+    "on-click": "swaync-client -t -sw",
+    "on-click-right": "swaync-client -d -sw",
+    "escape": true
+  },
+
+  "custom/power": {
+    "format": "⏻",
+    "tooltip": false,
+    "on-click": "~/.config/waybar/scripts/power-menu.sh",
+    "on-click-right": "hyprlock"
+  }
+}
